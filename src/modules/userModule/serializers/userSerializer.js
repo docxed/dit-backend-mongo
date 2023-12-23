@@ -16,8 +16,8 @@ module.exports = {
       phone: user.phone,
       province: user.province,
       groups: user.groups,
-      create_date: moment(user.createdAt).format('YYYY-MM-DD HH:mm:ss'),
-      update_date: moment(user.updatedAt).format('YYYY-MM-DD HH:mm:ss'),
+      create_date: user.createdAt ? moment(user.createdAt).format('YYYY-MM-DD HH:mm:ss') : null,
+      update_date: user.updatedAt ? moment(user.updatedAt).format('YYYY-MM-DD HH:mm:ss') : null,
       del_flag: user.del_flag,
     }
   },
