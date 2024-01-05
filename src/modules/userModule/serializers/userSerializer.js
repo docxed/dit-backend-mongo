@@ -6,6 +6,7 @@ module.exports = {
     return {
       id: user._id,
       email: user.email,
+      dq_score: user.dq_score,
       prefix: user.prefix,
       firstname: user.firstname,
       lastname: user.lastname,

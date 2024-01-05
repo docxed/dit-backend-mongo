@@ -45,6 +45,7 @@ module.exports = {
     const password_hashed = await module.exports.passwordHash(registerData.password)
     const user_created = await UserModel.create({
       email: registerData.email,
+      dq_score: registerData.dq_score,
       prefix: registerData.prefix,
       firstname: registerData.firstname,
       lastname: registerData.lastname,

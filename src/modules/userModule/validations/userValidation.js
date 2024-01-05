@@ -1,6 +1,7 @@
 const Joi = require('../../../utils/customJoi')
 
 const updateUserSchema = Joi.object({
+  dq_score: Joi.number().required(),
   prefix: Joi.string().max(50).required(),
   firstname: Joi.thaiOnly().max(100).required(),
   lastname: Joi.thaiOnly().max(100).required(),

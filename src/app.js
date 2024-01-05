@@ -20,6 +20,8 @@ const errorException = require('./middlewares/errorException')
 const authRouter = require('./modules/userModule/routes/authRoute')
 const userRouter = require('./modules/userModule/routes/userRoute')
 const examsetRouter = require('./modules/examsetModule/routes/examsetRoute')
+const examsetitemRouter = require('./modules/examsetModule/routes/examsetitemRoute')
+const examsetitemCategoryRouter = require('./modules/examsetModule/routes/examsetitemCategoryRoute')
 
 app.get('/', (req, res) => {
   res.send('Hello This is Digital Intelligence Test Application API.')
@@ -28,6 +30,8 @@ app.use('/api', apiRouter)
 apiRouter.use('/auth', authRouter)
 apiRouter.use('/user', userRouter)
 apiRouter.use('/examset', examsetRouter)
+apiRouter.use('/examsetitem', examsetitemRouter)
+apiRouter.use('/examsetitem-category', examsetitemCategoryRouter)
 
 app.use(errorException)
 

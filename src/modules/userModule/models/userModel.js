@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    dq_score: {
+      type: Number,
+      default: 0,
+    },
     firstname: {
       type: String,
       trim: true,

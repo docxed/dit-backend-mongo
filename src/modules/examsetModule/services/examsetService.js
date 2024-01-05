@@ -6,7 +6,7 @@ module.exports = {
   createExamset: async (examset, user) => {
     const { error, value: examsetData } = validateCreateExamset(examset)
     if (error) throw error
-    const examset_created = await ExamsetModel.create({
+    const { _id } = await ExamsetModel.create({
       title: examsetData.title,
       description: examsetData.description,
       time: examsetData.time,
@@ -17,17 +17,17 @@ module.exports = {
       del_flag: false,
       is_published: examsetData.is_published,
     })
-    return examsetSerializer(examset_created)
+    return module.exports.getExamset(_id)
   },
   getExamset: async (id) => {
     const examset = await ExamsetModel.findOne({ _id: id, del_flag: false })
+      .populate('create_by')
+      .populate('update_by')
     if (!examset) throw createError(404, 'ไม่พบข้อมูล', 'NotFoundError')
     return examsetSerializer(examset)
   },
   getAllExamset: async (filter = {}) => {
-    const examsets = await ExamsetModel.find({ ...filter, del_flag: false })
-      .populate('create_by')
-      .populate('update_by')
+    const examsets = await ExamsetModel.find(filter).populate('create_by').populate('update_by')
     return examsets.map((examset) => examsetSerializer(examset))
   },
   updateExamset: async (id, examset, user) => {
@@ -47,6 +47,8 @@ module.exports = {
       },
       { new: true },
     )
+      .populate('create_by')
+      .populate('update_by')
     return examsetSerializer(examset_updated)
   },
   patchExamset: async (id, examset, user) => {
@@ -63,6 +65,8 @@ module.exports = {
         new: true,
       },
     )
+      .populate('create_by')
+      .populate('update_by')
     return examsetSerializer(examset_updated)
   },
   deleteExamset: async (id, user) => {
