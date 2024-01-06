@@ -10,7 +10,7 @@ module.exports = {
       try {
         const examset = await examsetService.createExamset(req.body, req.user)
         res.status(201).json(examset)
-      } catch (error) {
+      } catch (err) {
         next(err)
       }
     },
@@ -21,7 +21,7 @@ module.exports = {
       try {
         const examset = await examsetService.getExamset(req.params.id)
         res.status(200).json(examset)
-      } catch (error) {
+      } catch (err) {
         next(err)
       }
     },
@@ -30,7 +30,7 @@ module.exports = {
     auth,
     async (req, res, next) => {
       try {
-        const { start_date, end_date, del_flag } = req.query
+        const { start_date, end_date, del_flag, is_published } = req.query
         const filter = {}
         if (del_flag) filter.del_flag = del_flag === 'true'
         if (start_date && end_date) {
@@ -47,9 +47,10 @@ module.exports = {
             $lte: moment(end_date).endOf('day').toDate(),
           }
         }
+        if (is_published) filter.is_published = is_published === 'true'
         const examsets = await examsetService.getAllExamset(filter)
         res.status(200).json(examsets)
-      } catch (error) {
+      } catch (err) {
         next(err)
       }
     },
@@ -61,7 +62,7 @@ module.exports = {
       try {
         const examset = await examsetService.updateExamset(req.params.id, req.body, req.user)
         res.status(200).json(examset)
-      } catch (error) {
+      } catch (err) {
         next(err)
       }
     },
@@ -73,7 +74,7 @@ module.exports = {
       try {
         const examset = await examsetService.patchExamset(req.params.id, req.body, req.user)
         res.status(200).json(examset)
-      } catch (error) {
+      } catch (err) {
         next(err)
       }
     },
@@ -85,7 +86,7 @@ module.exports = {
       try {
         await examsetService.deleteExamset(req.params.id, req.user)
         res.status(204).end()
-      } catch (error) {
+      } catch (err) {
         next(err)
       }
     },

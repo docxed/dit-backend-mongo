@@ -60,7 +60,7 @@ module.exports = {
     return examsetitemCategorySerializer(examsetitemCategoryNew)
   },
   deleteExamsetitemCategory: async (id, user) => {
-    await ExamsetitemCategoryModel.findByIdAndUpdate(
+    return await ExamsetitemCategoryModel.findByIdAndUpdate(
       id,
       {
         del_flag: true,
@@ -68,7 +68,6 @@ module.exports = {
       },
       { new: true },
     )
-    return true
   },
   restoreExamsetitemCategory: async (id, user) => {
     const examsetitemCategoryNew = await ExamsetitemCategoryModel.findByIdAndUpdate(
