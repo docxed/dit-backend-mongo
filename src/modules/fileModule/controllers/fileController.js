@@ -31,7 +31,6 @@ module.exports = {
     },
   ],
   getFileMedia: [
-    auth,
     async (req, res, next) => {
       try {
         const fileUrl = await getFileUrl(req.params.fileKey)
