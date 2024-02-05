@@ -47,6 +47,7 @@ module.exports = {
     auth,
     async (req, res, next) => {
       try {
+        console.log(req.params.id)
         const examsetitem = await examsetitemService.getExamsetitem(req.params.id)
         res.status(200).json(examsetitem)
       } catch (err) {

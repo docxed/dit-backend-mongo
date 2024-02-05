@@ -35,6 +35,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
     gender: {
+      required: true,
       type: String,
       trim: true,
     },

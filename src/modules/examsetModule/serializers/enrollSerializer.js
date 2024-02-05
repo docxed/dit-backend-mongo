@@ -3,7 +3,7 @@ const moment = require('../../../utils/moment')
 module.exports = {
   enrollSerializer: (enroll) => {
     return {
-      id: enroll.id,
+      id: enroll._id,
       user: {
         _id: enroll.user_id._id,
         prefix: enroll.user_id.prefix,

@@ -6,7 +6,7 @@ const updateUserSchema = Joi.object({
   firstname: Joi.thaiOnly().max(100).required(),
   lastname: Joi.thaiOnly().max(100).required(),
   school: Joi.string().max(255).required(),
-  gender: Joi.string().max(1).valid('M', 'F').empty(''),
+  gender: Joi.string().min(1).max(1).required().valid('M', 'F'),
   birthday: Joi.string()
     .max(10)
     .regex(/^\d{4}-\d{2}-\d{2}$/)
