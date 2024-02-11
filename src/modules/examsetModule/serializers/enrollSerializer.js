@@ -22,6 +22,7 @@ module.exports = {
         ? moment(enroll.end_datetime).format('YYYY-MM-DD HH:mm:ss')
         : null,
       is_submitted: enroll.is_submitted,
+      is_evaluated: enroll.is_evaluated,
       attempt: enroll.attempt,
       create_date: enroll.createdAt ? moment(enroll.createdAt).format('YYYY-MM-DD HH:mm:ss') : null,
       update_date: enroll.updatedAt ? moment(enroll.updatedAt).format('YYYY-MM-DD HH:mm:ss') : null,

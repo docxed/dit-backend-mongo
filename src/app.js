@@ -25,6 +25,8 @@ const examsetitemCategoryRouter = require('./modules/examsetModule/routes/examse
 const enrollRouter = require('./modules/examsetModule/routes/enrollRoute')
 const enrollitemRouter = require('./modules/examsetModule/routes/enrollitemRoute')
 const fileRouter = require('./modules/fileModule/routes/fileRoute')
+const evaluateRouter = require('./modules/examsetModule/routes/evaluateRoute')
+const evaluateitemRouter = require('./modules/examsetModule/routes/evaluateitemRoute')
 
 app.get('/', (req, res) => {
   res.send('Hello This is Digital Intelligence Test Application API.')
@@ -38,6 +40,8 @@ apiRouter.use('/examsetitem-category', examsetitemCategoryRouter)
 apiRouter.use('/enroll', enrollRouter)
 apiRouter.use('/enrollitem', enrollitemRouter)
 apiRouter.use('/file', fileRouter)
+apiRouter.use('/evaluate', evaluateRouter)
+apiRouter.use('/evaluateitem', evaluateitemRouter)
 
 app.use(errorException)
 

@@ -9,4 +9,8 @@ module.exports = {
     const user_updated = await UserModel.findByIdAndUpdate(id, userData, { new: true })
     return userSerializer(user_updated)
   },
+  getAllUsers: async (filter = {}) => {
+    const users = await UserModel.find(filter)
+    return users.map((user) => userSerializer(user))
+  },
 }

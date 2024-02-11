@@ -6,6 +6,11 @@ const examsetitemSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Examset',
     },
+    no: {
+      type: Number,
+      required: true,
+      unique: true,
+    },
     question: {
       type: String,
       required: true,

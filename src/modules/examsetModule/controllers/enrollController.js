@@ -41,4 +41,26 @@ module.exports = {
       }
     },
   ],
+  deleteEnroll: [
+    auth,
+    async (req, res, next) => {
+      try {
+        await enrollService.deleteEnroll(req.params.id)
+        res.status(204).end()
+      } catch (err) {
+        next(err)
+      }
+    },
+  ],
+  validateEnroll: [
+    auth,
+    async (req, res, next) => {
+      try {
+        const enroll = await enrollService.validateEnroll(req.body, req.user)
+        res.status(200).json(enroll)
+      } catch (err) {
+        next(err)
+      }
+    },
+  ],
 }

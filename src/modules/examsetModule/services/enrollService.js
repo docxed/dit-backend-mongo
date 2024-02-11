@@ -29,6 +29,7 @@ module.exports = {
       start_datetime: now,
       end_datetime: end_datetime,
       is_submitted: false,
+      is_evaluated: false,
       attempt: 0,
       del_flag: false,
     })
@@ -46,5 +47,38 @@ module.exports = {
   getAllEnroll: async (filter = {}) => {
     const enrolls = await EnrollModel.find(filter).populate('examset_id').populate('user_id')
     return enrolls.map((enroll) => enrollSerializer(enroll))
+  },
+  deleteEnroll: async (id) => {
+    return await EnrollModel.findOneAndUpdate(
+      {
+        _id: id,
+        del_flag: false,
+      },
+      {
+        del_flag: true,
+      },
+      {
+        new: true,
+      },
+    )
+  },
+  validateEnroll: async (enroll, user) => {
+    const now = moment().seconds(0)
+    const { enroll_id } = enroll
+    const enroll_exist = await EnrollModel.findOne({
+      _id: enroll_id,
+      user_id: user.id,
+      del_flag: false,
+    }).populate('examset_id')
+    if (!enroll_exist) throw createError(400, 'ไม่พบการลงทะเบียน', 'ValidationError')
+    if (enroll_exist.is_evaluated)
+      throw createError(400, 'คุณทำแบบทดสอบเรียบร้อยแล้ว', 'ValidationError')
+    if (enroll_exist.attempt >= enroll_exist.examset_id.max_attempt)
+      throw createError(400, 'คุณทำแบบทดสอบครบจำนวนครั้งแล้ว', 'ValidationError')
+    if (now.isAfter(enroll_exist.end_datetime))
+      throw createError(400, 'เวลาทำแบบทดสอบหมดแล้ว', 'ValidationError')
+    if (enroll_exist.examset_id.is_published === false)
+      throw createError(400, 'แบบทดสอบยังไม่เปิดให้ทำ', 'ValidationError')
+    return enroll_exist
   },
 }

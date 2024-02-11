@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const enrollSchema = new mongoose.Schema(
+const evaluateSchema = new mongoose.Schema(
   {
     examset_id: {
       type: mongoose.Schema.Types.ObjectId,
@@ -10,25 +10,9 @@ const enrollSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
-    start_datetime: {
-      type: Date,
-      required: true,
-    },
-    end_datetime: {
-      type: Date,
-      required: true,
-    },
-    is_submitted: {
-      type: Boolean,
-      default: false,
-    },
     is_evaluated: {
       type: Boolean,
       default: false,
-    },
-    attempt: {
-      type: Number,
-      default: 0,
     },
     del_flag: {
       type: Boolean,
@@ -40,4 +24,4 @@ const enrollSchema = new mongoose.Schema(
   },
 )
 
-module.exports = mongoose.model('Enroll', enrollSchema)
+module.exports = mongoose.model('Evaluate', evaluateSchema)

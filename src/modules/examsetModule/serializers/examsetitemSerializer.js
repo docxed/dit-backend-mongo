@@ -4,6 +4,7 @@ module.exports = {
   examsetitemSerializer: (examsetitem) => {
     return {
       id: examsetitem._id,
+      no: examsetitem.no,
       question: examsetitem.question,
       category: {
         id: examsetitem.category_id._id,

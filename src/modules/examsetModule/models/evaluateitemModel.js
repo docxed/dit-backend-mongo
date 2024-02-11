@@ -1,20 +1,28 @@
 const mongoose = require('mongoose')
 
-const enrollitemSchema = new mongoose.Schema(
+const evaluateitemSchema = new mongoose.Schema(
   {
-    enroll_id: {
+    evaluate_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Enroll',
+      ref: 'Evaluate',
     },
     examset_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Examset',
     },
-    examsetitem_id: {
+    enroll_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Examsetitem',
+      ref: 'Enroll',
     },
-    answer: {
+    enrollitem_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Enrollitem',
+    },
+    score: {
+      type: Number,
+      required: true,
+    },
+    comment: {
       type: String,
       required: false,
     },
@@ -32,4 +40,4 @@ const enrollitemSchema = new mongoose.Schema(
   },
 )
 
-module.exports = mongoose.model('Enrollitem', enrollitemSchema)
+module.exports = mongoose.model('Evaluateitem', evaluateitemSchema)

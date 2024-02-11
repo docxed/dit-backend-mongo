@@ -11,6 +11,7 @@ module.exports = {
       firstname: user.firstname,
       lastname: user.lastname,
       fullname: `${user.firstname} ${user.lastname}`,
+      fullname_with_school: `${user.firstname} ${user.lastname} (${user.school})`,
       school: user.school,
       gender: user.gender ? GENDER.find((v) => v.id === user.gender).name : null,
       birthday: user.birthday ? moment(user.birthday).format('YYYY-MM-DD') : null,

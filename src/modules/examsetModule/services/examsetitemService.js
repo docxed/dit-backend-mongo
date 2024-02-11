@@ -7,8 +7,15 @@ module.exports = {
   createExamsetitem: async (examsetitem, user) => {
     const { error, value: examsetitemData } = validateCreateExamsetitem(examsetitem)
     if (error) throw error
+    const is_duplicate_no = await ExamsetitemModel.findOne({
+      no: examsetitemData.no,
+      examset_id: examsetitemData.examset_id,
+      del_flag: false,
+    })
+    if (is_duplicate_no) throw createError(400, 'เลขข้อที่ซ้ำ', 'ValidationError')
     const { _id } = await ExamsetitemModel.create({
       examset_id: examsetitemData.examset_id,
+      no: examsetitemData.no,
       question: examsetitemData.question,
       category_id: examsetitemData.category_id,
       create_by: user.id,
@@ -36,6 +43,14 @@ module.exports = {
   updateExamsetitem: async (id, examsetitem, user) => {
     const { error, value: examsetitemData } = validateCreateExamsetitem(examsetitem)
     if (error) throw error
+    const is_duplicate_no = await ExamsetitemModel.findOne({
+      no: examsetitemData.no,
+      examset_id: examsetitemData.examset_id,
+      del_flag: false,
+    })
+    if (is_duplicate_no && is_duplicate_no._id.toString() !== id) {
+      throw createError(400, 'เลขข้อที่ซ้ำ', 'ValidationError')
+    }
     const examsetitem_updated = await ExamsetitemModel.findOneAndUpdate(
       { _id: id, del_flag: false },
       {
