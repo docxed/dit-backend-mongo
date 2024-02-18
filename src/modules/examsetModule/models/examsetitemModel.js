@@ -9,7 +9,6 @@ const examsetitemSchema = new mongoose.Schema(
     no: {
       type: Number,
       required: true,
-      unique: true,
     },
     question: {
       type: String,

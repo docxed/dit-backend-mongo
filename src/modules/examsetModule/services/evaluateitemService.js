@@ -9,7 +9,11 @@ module.exports = {
   createBulkEvaluateItem: async (evaluateitems, user) => {
     const { error, value: evaluateitemData } = validateCreateEvaluateItem(evaluateitems)
     if (error) throw error
-    await EvaluateitemModel.deleteMany({ evaluate_id: evaluateitemData.evaluate_id })
+    await EvaluateitemModel.deleteMany({
+      evaluate_id: evaluateitemData.evaluate_id,
+      enroll_id: evaluateitemData.enroll_id,
+      user_id: user.id,
+    })
     await EvaluateitemModel.insertMany(
       evaluateitemData.evaluateitems.map((evaluateitem) => ({
         evaluate_id: evaluateitem.evaluate_id,
@@ -44,6 +48,7 @@ module.exports = {
     const evaluateitems = await EvaluateitemModel.find(filters)
       .populate('user_id')
       .populate('enrollitem_id')
+      .populate('enroll_id')
     return evaluateitems.map((evaluateitem) => evaluateitemSerializer(evaluateitem))
   },
 }

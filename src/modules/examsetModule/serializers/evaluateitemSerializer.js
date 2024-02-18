@@ -16,6 +16,8 @@ module.exports = {
         phone: evaluateitem.user_id.phone,
         school: evaluateitem.user_id.school,
       },
+      enrollitem_id: evaluateitem.enrollitem_id,
+      enroll_id: evaluateitem.enroll_id,
       create_date: evaluateitem.createdAt
         ? moment(evaluateitem.createdAt).format('YYYY-MM-DD HH:mm:ss')
         : null,
