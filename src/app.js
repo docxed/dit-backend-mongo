@@ -13,7 +13,12 @@ connectDB()
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors())
+app.use(
+  cors({
+    origin: '*',
+    credentials: true,
+  }),
+)
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'))
 
 const errorException = require('./middlewares/errorException')
