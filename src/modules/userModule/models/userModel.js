@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    m2_score: {
+      type: Number,
+      default: 0,
+    },
     firstname: {
       type: String,
       trim: true,

@@ -46,6 +46,7 @@ module.exports = {
     const user_created = await UserModel.create({
       email: registerData.email,
       dq_score: registerData.dq_score,
+      m2_score: registerData.m2_score,
       prefix: registerData.prefix,
       firstname: registerData.firstname,
       lastname: registerData.lastname,

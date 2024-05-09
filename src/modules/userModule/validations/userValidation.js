@@ -2,6 +2,7 @@ const Joi = require('../../../utils/customJoi')
 
 const updateUserSchema = Joi.object({
   dq_score: Joi.number().required(),
+  m2_score: Joi.number().required(),
   prefix: Joi.string().max(50).required(),
   firstname: Joi.thaiOnly().max(100).required(),
   lastname: Joi.thaiOnly().max(100).required(),
@@ -18,6 +19,7 @@ const updateUserSchema = Joi.object({
 const manageCreateUserSchema = Joi.object({
   email: Joi.string().max(100).email().required(),
   dq_score: Joi.number().required(),
+  m2_score: Joi.number().required(),
   prefix: Joi.string().max(50).required(),
   firstname: Joi.thaiOnly().max(100).required(),
   lastname: Joi.thaiOnly().max(100).required(),
@@ -35,6 +37,7 @@ const manageCreateUserSchema = Joi.object({
 
 const manageUpdateUserSchema = Joi.object({
   dq_score: Joi.number().required(),
+  m2_score: Joi.number().required(),
   prefix: Joi.string().max(50).required(),
   firstname: Joi.thaiOnly().max(100).required(),
   lastname: Joi.thaiOnly().max(100).required(),

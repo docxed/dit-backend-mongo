@@ -40,6 +40,7 @@ module.exports = {
                   : 2
                 : 'ไม่ระบุ',
               dq_score: evaluateitem.enroll_id.user_id.dq_score,
+              m2_score: evaluateitem.enroll_id.user_id.m2_score,
               create_date: moment(evaluateitem.enroll_id.createdAt).format('YYYY-MM-DD HH:mm:ss'),
             },
             question_no: evaluateitem.enrollitem_id.examsetitem_id.no,
