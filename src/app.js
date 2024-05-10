@@ -20,6 +20,7 @@ app.use(
   }),
 )
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'))
+app.options('*', cors())
 
 const errorException = require('./middlewares/errorException')
 const authRouter = require('./modules/userModule/routes/authRoute')
