@@ -32,4 +32,22 @@ module.exports = {
       }
     },
   ],
+  getDistinctEvaluateItem: [
+    auth,
+    async (req, res, next) => {
+      try {
+        const filter = {}
+        const { del_flag, evaluate_id, examset_id, enroll_id, enrollitem_id } = req.query
+        if (del_flag) filter.del_flag = del_flag === 'true'
+        if (evaluate_id) filter.evaluate_id = evaluate_id
+        if (examset_id) filter.examset_id = examset_id
+        if (enroll_id) filter.enroll_id = enroll_id
+        if (enrollitem_id) filter.enrollitem_id = enrollitem_id
+        const evaluateitems = await evaluateitemService.getDistinctlEvaluateItem(filter)
+        res.status(200).json(evaluateitems)
+      } catch (err) {
+        next(err)
+      }
+    },
+  ],
 }

@@ -51,4 +51,7 @@ module.exports = {
       .populate('enroll_id')
     return evaluateitems.map((evaluateitem) => evaluateitemSerializer(evaluateitem))
   },
+  getDistinctlEvaluateItem: async (filters = {}) => {
+    return await EvaluateitemModel.distinct('enroll_id', filters)
+  },
 }

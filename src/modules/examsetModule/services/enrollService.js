@@ -44,9 +44,27 @@ module.exports = {
       .populate('user_id')
     return enrollSerializer(enroll)
   },
-  getAllEnroll: async (filter = {}) => {
-    const enrolls = await EnrollModel.find(filter).populate('examset_id').populate('user_id')
+  getAllEnroll: async (filter = {}, options = {}) => {
+    if (options.skip) {
+      options.skip = parseInt(options.skip)
+    }
+    if (options.limit) {
+      options.limit = parseInt(options.limit)
+    }
+    if (options.sortDesc) {
+      options.sortDesc = parseInt(options.sortDesc)
+    }
+    const enrolls = await EnrollModel.find(filter)
+      .skip(options.skip)
+      .limit(options.limit)
+      .sort({ [options.sortBy]: options.sortDesc })
+      .populate('examset_id')
+      .populate('user_id')
     return enrolls.map((enroll) => enrollSerializer(enroll))
+  },
+  getEnrollCount: async () => {
+    const count = await EnrollModel.countDocuments()
+    return count
   },
   deleteEnroll: async (id) => {
     return await EnrollModel.findOneAndUpdate(

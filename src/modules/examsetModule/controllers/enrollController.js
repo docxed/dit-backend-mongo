@@ -30,12 +30,22 @@ module.exports = {
     async (req, res, next) => {
       try {
         const { del_flag, user_id, examset_id } = req.query
+        const { skip, limit, sortBy, sortDesc, search } = req.query
         const filter = {}
         if (del_flag) filter.del_flag = del_flag === 'true'
         if (user_id) filter.user_id = user_id
         if (examset_id) filter.examset_id = examset_id
-        const enrolls = await enrollService.getAllEnroll(filter)
-        res.status(200).json(enrolls)
+        const enrolls = await enrollService.getAllEnroll(filter, {
+          skip: parseInt(skip),
+          limit: parseInt(limit),
+          sortBy: sortBy || ['created_at'],
+          sortDesc: parseInt(sortDesc) || -1,
+        })
+        const enrolls_count = await enrollService.getEnrollCount()
+        res.status(200).json({
+          results: enrolls,
+          count: enrolls_count,
+        })
       } catch (err) {
         next(err)
       }
