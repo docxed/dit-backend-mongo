@@ -7,8 +7,8 @@ module.exports = {
     role('ครู', 'แอดมิน'),
     async (req, res, next) => {
       try {
-        const evaluateitems = await evaluateitemService.createBulkEvaluateItem(req.body, req.user)
-        res.status(201).json(evaluateitems)
+        await evaluateitemService.createBulkEvaluateItem(req.body, req.user)
+        res.status(201).end()
       } catch (err) {
         next(err)
       }

@@ -23,7 +23,7 @@ module.exports = {
       { _id: enrollitemsData.enroll_id },
       { is_submitted: true, attempt: enroll.attempt + 1 },
     )
-    return module.exports.getAllEnrollItem({ enroll_id: enrollitemsData.enroll_id })
+    return true
   },
   getAllEnrollItem: async (filters = {}) => {
     const enrollitems = await EnrollitemModel.find(filters)

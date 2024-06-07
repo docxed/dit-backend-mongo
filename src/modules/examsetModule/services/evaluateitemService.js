@@ -42,7 +42,7 @@ module.exports = {
         is_evaluated: true,
       },
     )
-    return module.exports.getAllEvaluateItem({ evaluate_id: evaluateitemData.evaluate_id })
+    return true
   },
   getAllEvaluateItem: async (filters = {}) => {
     const evaluateitems = await EvaluateitemModel.find(filters)

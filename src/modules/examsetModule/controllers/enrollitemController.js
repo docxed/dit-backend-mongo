@@ -6,8 +6,8 @@ module.exports = {
     auth,
     async (req, res, next) => {
       try {
-        const enrollitems = await enrollitemService.createBulkEnrollItem(req.body, req.user)
-        res.status(201).json(enrollitems)
+        await enrollitemService.createBulkEnrollItem(req.body, req.user)
+        res.status(201).end()
       } catch (err) {
         next(err)
       }
