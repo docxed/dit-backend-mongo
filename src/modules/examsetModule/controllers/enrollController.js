@@ -38,8 +38,8 @@ module.exports = {
         const enrolls = await enrollService.getAllEnroll(filter, {
           skip: parseInt(skip),
           limit: parseInt(limit),
-          sortBy: sortBy || ['created_at'],
-          sortDesc: parseInt(sortDesc) || -1,
+          sortBy: sortBy || ['createdAt'],
+          sortDesc: sortDesc === 'false' ? 1 : -1,
         })
         const enrolls_count = await enrollService.getEnrollCount()
         res.status(200).json({
